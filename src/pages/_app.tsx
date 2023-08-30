@@ -1,12 +1,12 @@
 import type { AppProps } from 'next/app';
-import GlobalStyle from '@/styles/global.style';
-import ResetStyle from '@/styles/reset.styles';
+import { Header } from '@/components/Header';
+import '../styles/reset.scss';
+import '../styles/global.scss';
  
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <ResetStyle />
-      <GlobalStyle />
+      <Header />
       <Component {...pageProps} />   
     </>
   )

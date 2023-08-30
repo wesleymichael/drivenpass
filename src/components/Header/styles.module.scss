@@ -1,0 +1,22 @@
+.headerContainer {
+  height: 4.375rem;
+  background-color: #141A29;
+}
+
+.headerContext {
+  max-width: 1120px;
+  height: 4.375rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: azure;
+  svg {
+    font-size: 3rem;
+    cursor: pointer;
+  }
+  h1{
+    font-size: 3rem;
+  }
+}
