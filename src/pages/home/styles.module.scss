@@ -1,0 +1,33 @@
+.categoryContainer {
+  width: 100%;
+  max-width: 580px;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+  color: #013047;
+  font-size: 1.5rem;
+  
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    svg {
+      font-size: 3rem;
+    }
+  }
+}
+
+.number {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  background-color:#013047;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
