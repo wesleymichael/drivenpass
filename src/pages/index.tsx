@@ -1,6 +1,6 @@
 import { SubTitleBar } from "@/components/SubtitleBar";
 import Head from "next/head";
-import styles from './styles.module.scss';
+import styles from '@/styles/home.module.scss';
 import { RiLogoutBoxRFill } from 'react-icons/ri';
 import { BsFillPencilFill } from 'react-icons/bs';
 import { AiFillCreditCard, AiOutlineWifi } from 'react-icons/ai';

@@ -1,10 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  exportPathMap: async function () {
-    return {
-      '/': { page: '/home' },
-    };
-  },
-}
+const nextConfig = {}
 
 module.exports = nextConfig
