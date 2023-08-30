@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './styles.module.scss';
+import authStyles from '@/components/styles/authStyles.module.scss';
 import { GiPadlock } from 'react-icons/gi';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -20,6 +21,8 @@ export default function Register() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setIsLoading(true);
+
+    //TODO: criar um cadastro no banco de dados
   }
 
   function validateEmail(email: string) {
@@ -34,13 +37,13 @@ export default function Register() {
 
   
   return(
-    <main className={styles.registerContainer}>
-      <div className={styles.logoContainer}>
+    <main className={authStyles.registerLoginContainer}>
+      <div className={authStyles.logoContainer}>
         <GiPadlock/>
         <h1>DrivenPass</h1>
       </div>
 
-      <form className={styles.formContainer} onSubmit={handleSubmit}>
+      <form className={authStyles.formContainer} onSubmit={handleSubmit}>
         <input
           type="email"
           placeholder="Email"
@@ -68,7 +71,7 @@ export default function Register() {
         </button>
       </form>
 
-      <div className={styles.switch_to_login}>
+      <div className={authStyles.switch_to_login}>
         <Link href='login'>
           <h1>Já tem uma conta? Faça login!</h1>
         </Link>

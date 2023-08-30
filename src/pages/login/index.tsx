@@ -59,8 +59,7 @@ export default function Login() {
           {isLoading ? "Loading..." : "Acessar"}
         </button>
       </form>
-
-
+      
       <div className={authStyles.switch_to_login}>
         <Link href='register'>
           <h1>Ainda não tem uma conta? Cadastre-se!</h1>
