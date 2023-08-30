@@ -6,12 +6,14 @@ import { useRouter } from 'next/router';
  
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-
   const currentRouterPage = router.pathname;
 
   return (
     <>
-      {currentRouterPage !== '/register' && <Header />}
+      {currentRouterPage !== '/register' &&
+       currentRouterPage !== '/login' && 
+       <Header />
+      }
       <Component {...pageProps} /> 
     </>
   )
