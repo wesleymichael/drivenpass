@@ -1,3 +1,4 @@
+import { SubTitleBar } from "@/components/SubtitleBar"
 import Head from "next/head"
 
 export default function Home() {
@@ -6,9 +7,10 @@ export default function Home() {
       <Head>
         <title>Driven Pass - Organizando suas senhas</title>
       </Head>
-      <div>
+      <main>
+        <SubTitleBar title='Credenciais'/>
         <h1>Home</h1>
-      </div>
+      </main>
     </>
   )
 }
