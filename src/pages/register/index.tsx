@@ -4,6 +4,7 @@ import authStyles from '@/components/styles/authStyles.module.scss';
 import { GiPadlock } from 'react-icons/gi';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Head from 'next/head';
 
 export default function Register() {
   const [form, setForm] = useState({'email': '', 'password': ''});
@@ -37,6 +38,10 @@ export default function Register() {
 
   
   return(
+    <>
+    <Head>
+      <title>DrivenPass - Entre ou cadastre-se!</title>
+    </Head>
     <main className={authStyles.registerLoginContainer}>
       <div className={authStyles.logoContainer}>
         <GiPadlock/>
@@ -54,7 +59,7 @@ export default function Register() {
           required
           pattern={validateEmail(form.email) ? undefined : "[^\\s]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"}
           title="Insira um email válido"
-        />
+          />
         <input
           type="password"
           placeholder="Senha"
@@ -65,7 +70,7 @@ export default function Register() {
           required
           pattern={validatePassword(form.password) ? undefined : "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{10,}$"}
           title="A senha deve ter pelo menos: 10 caracteres, 1 caractere especial, 1 letra maiúscula, 1 letra minúscula e 1 número"
-        />
+          />
         <button type="submit" disabled={isLoading}>
           {isLoading ? "Loading..." : "Cadastrar"}
         </button>
@@ -77,5 +82,6 @@ export default function Register() {
         </Link>
       </div>
     </main>
+    </>
   )
 }

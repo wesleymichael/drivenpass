@@ -1,4 +1,5 @@
 import authStyles from '@/components/styles/authStyles.module.scss';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -28,6 +29,10 @@ export default function Login() {
   }
   
   return (
+    <>
+    <Head>
+      <title>DrivenPass - Entre ou cadastre-se!</title>
+    </Head>
     <main className={authStyles.registerLoginContainer}>
       <div className={authStyles.logoContainer}>
         {!isAuthorized ? <GiPadlock/> : <GiPadlockOpen/>}
@@ -66,5 +71,6 @@ export default function Login() {
         </Link>
       </div>
     </main>
+    </>
   )
 }
