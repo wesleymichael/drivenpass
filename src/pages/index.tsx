@@ -1,23 +1,23 @@
-import { SubTitleBar } from "@/components/SubtitleBar";
 import Head from "next/head";
+import Link from "next/link";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import useToken from "@/hooks/useToken";
 import styles from '@/styles/home.module.scss';
 import { RiLogoutBoxRFill } from 'react-icons/ri';
 import { BsFillPencilFill } from 'react-icons/bs';
-import { AiFillCreditCard, AiOutlineWifi } from 'react-icons/ai';
-import Link from "next/link";
-import useToken from "@/hooks/useToken";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { SubTitleBar } from "@/components/SubtitleBar";
 import useGetCards from "@/hooks/api/useGetCards";
-import useGetNotes from "@/hooks/api/useGetNotes";
+import { AiFillCreditCard, AiOutlineWifi } from 'react-icons/ai';
 import { useCredentialContext } from "@/hooks/useCredentialContext";
 import { useWifiContext } from "@/hooks/useWifiContext";
+import { useNotesContext } from "@/hooks/useNoteContext";
 
 export default function Home() {
   const { credentialsData } = useCredentialContext();
+  const { notesData } = useNotesContext();
   const { wifisData } = useWifiContext();
   const { cards } = useGetCards();
-  const { notes } = useGetNotes();
   const router = useRouter();
   const token = useToken();
   
@@ -54,7 +54,7 @@ export default function Home() {
             </div>
           </Link>
           <div className={styles.number}>
-            {notes?.length}
+            {notesData?.length}
           </div>
         </div>
 

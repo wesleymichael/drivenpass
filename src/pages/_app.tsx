@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import { UserProvider } from '@/context/UserContext';
 import { CredentialProvider } from '@/context/CredentialContext';
 import { WifiProvider } from '@/context/WifiContext';
+import { NotesProvider } from '@/context/NotesContext';
  
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -18,10 +19,12 @@ export default function App({ Component, pageProps }: AppProps) {
       <ToastContainer />
       <UserProvider>
         <CredentialProvider>
-          <WifiProvider>
-            {['/register', '/login'].includes(currentRouterPage) ? null : <Header />}
-            <Component {...pageProps} /> 
-          </WifiProvider>
+          <NotesProvider>
+            <WifiProvider>
+              {['/register', '/login'].includes(currentRouterPage) ? null : <Header />}
+              <Component {...pageProps} /> 
+            </WifiProvider>
+          </NotesProvider>
         </CredentialProvider>
       </UserProvider>
     </>

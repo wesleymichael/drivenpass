@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import api from './api';
 
-interface Note {
+export interface Note {
   id: number;
   title: string;
   anotation: string;
