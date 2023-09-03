@@ -4,9 +4,10 @@ import styles from '@/styles/home.module.scss';
 import { RiLogoutBoxRFill } from 'react-icons/ri';
 import Link from "next/link";
 import useGetCredentials from "@/hooks/api/useGetCredentials";
+import { useCredentialContext } from "@/hooks/useCredentialContext";
 
 export default function Credentials() {
-  const { credentials } = useGetCredentials();
+  const { credentialsData } = useCredentialContext();
 
   return (
     <>
@@ -15,7 +16,7 @@ export default function Credentials() {
       </Head>
       <main>
         <SubTitleBar title='Credenciais'/>
-        {credentials?.map((credential) => {
+        {credentialsData?.map((credential) => {
           return (
             <>
             <div className={styles.categoryContainer}>

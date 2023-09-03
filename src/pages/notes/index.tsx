@@ -17,7 +17,7 @@ export default function Credentials() {
         <SubTitleBar title='Notas Seguras'/>
         {notes?.map((note) => {
           return (
-            <>
+          <>
             <div className={styles.categoryContainer}>
               <Link href={`/notes/${note.id}`}>
                 <div>

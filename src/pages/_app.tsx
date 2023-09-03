@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
 import { UserProvider } from '@/context/UserContext';
+import { CredentialProvider } from '@/context/CredentialContext';
  
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -15,11 +16,13 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <ToastContainer/>
       <UserProvider>
-        {currentRouterPage !== '/register' &&
-        currentRouterPage !== '/login' && 
-        <Header />
-        }
-        <Component {...pageProps} /> 
+        <CredentialProvider>
+          {currentRouterPage !== '/register' &&
+          currentRouterPage !== '/login' && 
+          <Header />
+          }
+          <Component {...pageProps} /> 
+        </CredentialProvider>
       </UserProvider>
     </>
   )

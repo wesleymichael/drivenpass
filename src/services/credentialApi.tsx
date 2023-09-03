@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import api from './api';
 
-interface Credential {
+export interface Credential {
   id: number;
   password: string;
   title: string;

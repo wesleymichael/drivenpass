@@ -5,16 +5,16 @@ import { RiLogoutBoxRFill } from 'react-icons/ri';
 import { BsFillPencilFill } from 'react-icons/bs';
 import { AiFillCreditCard, AiOutlineWifi } from 'react-icons/ai';
 import Link from "next/link";
-import useGetCredentials from "@/hooks/api/useGetCredentials";
 import useToken from "@/hooks/useToken";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import useGetCards from "@/hooks/api/useGetCards";
 import useGetWifi from "@/hooks/api/useGetWifi";
 import useGetNotes from "@/hooks/api/useGetNotes";
+import { useCredentialContext } from "@/hooks/useCredentialContext";
 
 export default function Home() {
-  const { credentials } = useGetCredentials();
+  const { credentialsData } = useCredentialContext();
   const { cards } = useGetCards();
   const { wifi } = useGetWifi();
   const { notes } = useGetNotes();
@@ -42,7 +42,7 @@ export default function Home() {
             </div>
           </Link>
           <div className={styles.number}>
-            {credentials?.length}
+            {credentialsData?.length}
           </div>
         </div>
 
