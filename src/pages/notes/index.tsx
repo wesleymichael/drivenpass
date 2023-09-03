@@ -4,6 +4,9 @@ import styles from '@/styles/home.module.scss';
 import { BsFillPencilFill } from 'react-icons/bs';
 import Link from "next/link";
 import useGetNotes from "@/hooks/api/useGetNotes";
+import { HiOutlineArrowLeft } from "react-icons/hi";
+import { MdAddCircleOutline } from "react-icons/md";
+import footerStyles from '@/components/Footer/styles.module.scss';
 
 export default function Credentials() {
   const { notes } = useGetNotes();
@@ -29,6 +32,19 @@ export default function Credentials() {
           </>
           )
         })}
+        <div className={footerStyles.footerContainer}>
+          <Link href='/'>
+            <div>
+              <h1>
+                <HiOutlineArrowLeft />
+                <p>Voltar</p>
+              </h1>
+            </div>
+          </Link>
+          <div className={footerStyles.icon_add}>
+            <MdAddCircleOutline/>
+          </div>
+        </div>
       </main>
     </>
   )

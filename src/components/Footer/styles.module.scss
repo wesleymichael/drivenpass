@@ -1,0 +1,26 @@
+.footerContainer {
+  height: 5rem;
+  width: 100vw;
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0 2rem;
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  svg {
+    cursor: pointer;
+  }
+  h1 {
+    display: flex;
+  }
+  p {
+    margin-left: 0.5rem;
+  }
+}
+
+.icon_add {
+  font-size: 3rem;
+}

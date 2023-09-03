@@ -14,16 +14,13 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <ToastContainer/>
+      <ToastContainer />
       <UserProvider>
         <CredentialProvider>
-          {currentRouterPage !== '/register' &&
-          currentRouterPage !== '/login' && 
-          <Header />
-          }
+          {['/register', '/login'].includes(currentRouterPage) ? null : <Header />}
           <Component {...pageProps} /> 
         </CredentialProvider>
       </UserProvider>
     </>
-  )
+  );
 }

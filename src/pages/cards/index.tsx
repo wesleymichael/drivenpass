@@ -4,6 +4,9 @@ import styles from '@/styles/home.module.scss';
 import { AiFillCreditCard } from 'react-icons/ai';
 import Link from "next/link";
 import useGetCards from "@/hooks/api/useGetCards";
+import footerStyles from '@/components/Footer/styles.module.scss';
+import { HiOutlineArrowLeft } from "react-icons/hi";
+import { MdAddCircleOutline } from "react-icons/md";
 
 export default function Credentials() {
   const { cards } = useGetCards();
@@ -29,6 +32,19 @@ export default function Credentials() {
           </>
           )
         })}
+        <div className={footerStyles.footerContainer}>
+          <Link href='/'>
+            <div>
+              <h1>
+                <HiOutlineArrowLeft />
+                <p>Voltar</p>
+              </h1>
+            </div>
+          </Link>
+          <div className={footerStyles.icon_add}>
+            <MdAddCircleOutline />
+          </div>
+        </div>
       </main>
     </>
   )
