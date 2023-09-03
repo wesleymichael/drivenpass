@@ -9,9 +9,11 @@ import useGetCredentials from "@/hooks/api/useGetCredentials";
 import useToken from "@/hooks/useToken";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import useGetCards from "@/hooks/api/useGetCards";
 
 export default function Home() {
   const { credentials } = useGetCredentials();
+  const { cards } = useGetCards();
   const router = useRouter();
   const token = useToken();
   
@@ -60,7 +62,7 @@ export default function Home() {
             </div>
           </Link>
           <div className={styles.number}>
-            {7}
+          {cards?.length}
           </div>
         </div>
 
