@@ -5,25 +5,30 @@ import { GiPadlock } from 'react-icons/gi';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Head from 'next/head';
+import { toast } from 'react-toastify';
+import { register } from '@/services/authApi';
 
 export default function Register() {
   const [form, setForm] = useState({'email': '', 'password': ''});
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter()
 
-  // if(isLoading) {
-  //   router.push('/')
-  // }
-
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm({...form, [e.target.name]: e.target.value})
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     setIsLoading(true);
 
-    //TODO: criar um cadastro no banco de dados
+    try {
+      await register(form.email, form.password);
+      toast('Cadastro feito com sucesso!');
+      router.push('/login');
+    } catch (error: any) {
+      toast(error.response.data.message)
+      setIsLoading(false);
+    }
   }
 
   function validateEmail(email: string) {
