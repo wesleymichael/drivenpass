@@ -3,7 +3,6 @@ import Head from "next/head";
 import styles from '@/styles/home.module.scss';
 import { RiLogoutBoxRFill } from 'react-icons/ri';
 import Link from "next/link";
-import useGetCredentials from "@/hooks/api/useGetCredentials";
 import { useCredentialContext } from "@/hooks/useCredentialContext";
 
 export default function Credentials() {

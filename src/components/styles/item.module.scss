@@ -1,0 +1,35 @@
+.categoryContainer {
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0;
+  padding-left: 2rem;
+  color: #013047;
+  font-size: 1.5rem;
+  flex-direction: column;
+  
+  div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    svg {
+      font-size: 3rem;
+    }
+  }
+}
+
+.paramContainer {
+  margin-top: 2rem;
+  gap: 2rem;
+  div {
+    h2 {
+      font-weight: bold;
+    }
+
+    p {
+      margin-top: 0.2rem;
+      font-size: 1.2rem;
+    }
+  }
+}
