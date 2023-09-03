@@ -1,5 +1,5 @@
 import React, { createContext, Dispatch, ReactNode, SetStateAction } from 'react';
-import useLocalStorage from '../hooks/useLocalStorage';
+import useLocalStorage from '@/hooks/useLocalStorage';
 
 interface UserData {
   token: string;

@@ -5,8 +5,22 @@ import { RiLogoutBoxRFill } from 'react-icons/ri';
 import { BsFillPencilFill } from 'react-icons/bs';
 import { AiFillCreditCard, AiOutlineWifi } from 'react-icons/ai';
 import Link from "next/link";
+import useGetCredentials from "@/hooks/api/useGetCredentials";
+import useToken from "@/hooks/useToken";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Home() {
+  const { credentials } = useGetCredentials();
+  const router = useRouter();
+  const token = useToken();
+  
+  useEffect(() => {
+    if(!token) {
+      router.push('/login');
+    }
+  }, [router, token]);
+
   return (
     <>
       <Head>
@@ -22,7 +36,7 @@ export default function Home() {
             </div>
           </Link>
           <div className={styles.number}>
-            {1}
+            {credentials?.length}
           </div>
         </div>
 

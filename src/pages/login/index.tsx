@@ -5,7 +5,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
-import { GiPadlock, GiPadlockOpen } from 'react-icons/gi'
+import { GiPadlock, GiPadlockOpen } from 'react-icons/gi';
 import { toast } from 'react-toastify';
 
 export default function Login() {
