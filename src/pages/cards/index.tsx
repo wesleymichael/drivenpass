@@ -1,28 +1,28 @@
 import { SubTitleBar } from "@/components/SubtitleBar";
 import Head from "next/head";
 import styles from '@/styles/home.module.scss';
-import { RiLogoutBoxRFill } from 'react-icons/ri';
+import { AiFillCreditCard } from 'react-icons/ai';
 import Link from "next/link";
-import useGetCredentials from "@/hooks/api/useGetCredentials";
+import useGetCards from "@/hooks/api/useGetCards";
 
 export default function Credentials() {
-  const { credentials } = useGetCredentials();
+  const { cards } = useGetCards();
 
   return (
     <>
       <Head>
-        <title>Credenciais</title>
+        <title>Cartões</title>
       </Head>
       <main>
-        <SubTitleBar title='Credenciais'/>
-        {credentials?.map((credential) => {
+        <SubTitleBar title='Cartões'/>
+        {cards?.map((card) => {
           return (
             <>
             <div className={styles.categoryContainer}>
-              <Link href={`/credentials/${credential.id}`}>
+              <Link href={`/cards/${card.id}`}>
                 <div>
-                  <RiLogoutBoxRFill />
-                  <h1>{credential.title}</h1>
+                  <AiFillCreditCard />
+                  <h1>{card.title}</h1>
                 </div>
               </Link>
             </div>
