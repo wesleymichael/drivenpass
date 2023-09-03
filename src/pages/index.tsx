@@ -11,11 +11,13 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import useGetCards from "@/hooks/api/useGetCards";
 import useGetWifi from "@/hooks/api/useGetWifi";
+import useGetNotes from "@/hooks/api/useGetNotes";
 
 export default function Home() {
   const { credentials } = useGetCredentials();
   const { cards } = useGetCards();
   const { wifi } = useGetWifi();
+  const { notes } = useGetNotes();
   const router = useRouter();
   const token = useToken();
   
@@ -52,7 +54,7 @@ export default function Home() {
             </div>
           </Link>
           <div className={styles.number}>
-            {5}
+            {notes?.length}
           </div>
         </div>
 
