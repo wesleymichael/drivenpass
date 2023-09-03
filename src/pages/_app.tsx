@@ -5,6 +5,7 @@ import '../styles/global.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
+import { UserProvider } from '@/context/UserContext';
  
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -13,11 +14,13 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <ToastContainer/>
-      {currentRouterPage !== '/register' &&
-       currentRouterPage !== '/login' && 
-       <Header />
-      }
-      <Component {...pageProps} /> 
+      <UserProvider>
+        {currentRouterPage !== '/register' &&
+        currentRouterPage !== '/login' && 
+        <Header />
+        }
+        <Component {...pageProps} /> 
+      </UserProvider>
     </>
   )
 }

@@ -1,26 +1,47 @@
 import authStyles from '@/components/styles/authStyles.module.scss';
+import UserContext, { UserContextProps } from '@/context/UserContext';
+import { login } from '@/services/authApi';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { GiPadlock, GiPadlockOpen } from 'react-icons/gi'
+import { toast } from 'react-toastify';
 
 export default function Login() {
   const [form, setForm] = useState({'email': '', 'password': ''});
   const [isLoading, setIsLoading] = useState(false);
   const [isAuthorized, setIsAuthorized] = useState(false);
+
+  const { userData, setUserData } = useContext(UserContext) as UserContextProps;
+
   const router = useRouter();
+
+  useEffect(() => {
+    if(userData && userData.token) {
+      router.push('/');
+    }
+  }, []);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm({...form, [e.target.name]: e.target.value})
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsLoading(true);
 
-    //TODO: enviar form
-    setIsAuthorized(true);
+    try {
+      const userData = await login(form.email, form.password);
+      setUserData(userData);
+      setIsAuthorized(true);
+      setTimeout(() => {
+        router.push('/');
+      }, 1000);
+    } catch (error : any) {
+      toast(error.response.data.message)
+      setIsLoading(false);
+    }
   }
 
   function validateEmail(email: string) {
