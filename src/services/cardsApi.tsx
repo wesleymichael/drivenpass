@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import api from './api';
 
-interface Cards {
+export interface Cards {
   id: number;
   title: string;
   number: string;

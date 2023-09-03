@@ -5,7 +5,7 @@ export function useWifiContext() {
   const context = useContext(WifiContext);
 
   if (context === undefined) {
-    throw new Error('useCredentialContext must be used within a CredentialProvider');
+    throw new Error('useWifiContext must be used within a WifiProvider');
   }
   return context;
 }

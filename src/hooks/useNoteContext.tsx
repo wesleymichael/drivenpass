@@ -5,7 +5,7 @@ export function useNotesContext() {
   const context = useContext(NotesContext);
 
   if (context === undefined) {
-    throw new Error('useCredentialContext must be used within a CredentialProvider');
+    throw new Error('useNotesContext must be used within a NotesProvider');
   }
   return context;
 }

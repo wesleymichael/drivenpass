@@ -7,17 +7,17 @@ import styles from '@/styles/home.module.scss';
 import { RiLogoutBoxRFill } from 'react-icons/ri';
 import { BsFillPencilFill } from 'react-icons/bs';
 import { SubTitleBar } from "@/components/SubtitleBar";
-import useGetCards from "@/hooks/api/useGetCards";
-import { AiFillCreditCard, AiOutlineWifi } from 'react-icons/ai';
-import { useCredentialContext } from "@/hooks/useCredentialContext";
 import { useWifiContext } from "@/hooks/useWifiContext";
 import { useNotesContext } from "@/hooks/useNoteContext";
+import { useCardsContext } from "@/hooks/useCardContext";
+import { AiFillCreditCard, AiOutlineWifi } from 'react-icons/ai';
+import { useCredentialContext } from "@/hooks/useCredentialContext";
 
 export default function Home() {
   const { credentialsData } = useCredentialContext();
   const { notesData } = useNotesContext();
   const { wifisData } = useWifiContext();
-  const { cards } = useGetCards();
+  const { cardsData } = useCardsContext();
   const router = useRouter();
   const token = useToken();
   
@@ -66,7 +66,7 @@ export default function Home() {
             </div>
           </Link>
           <div className={styles.number}>
-          {cards?.length}
+          {cardsData?.length}
           </div>
         </div>
 

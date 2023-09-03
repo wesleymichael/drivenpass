@@ -9,6 +9,7 @@ import { UserProvider } from '@/context/UserContext';
 import { CredentialProvider } from '@/context/CredentialContext';
 import { WifiProvider } from '@/context/WifiContext';
 import { NotesProvider } from '@/context/NotesContext';
+import { CardsProvider } from '@/context/CardsContext';
  
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -21,8 +22,10 @@ export default function App({ Component, pageProps }: AppProps) {
         <CredentialProvider>
           <NotesProvider>
             <WifiProvider>
-              {['/register', '/login'].includes(currentRouterPage) ? null : <Header />}
-              <Component {...pageProps} /> 
+              <CardsProvider>
+                {['/register', '/login'].includes(currentRouterPage) ? null : <Header />}
+                <Component {...pageProps} /> 
+              </CardsProvider>
             </WifiProvider>
           </NotesProvider>
         </CredentialProvider>
