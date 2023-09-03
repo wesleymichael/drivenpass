@@ -3,6 +3,10 @@ import styles from '../../components/styles/item.module.scss';
 import { useRouter } from 'next/router';
 import { SubTitleBar } from '@/components/SubtitleBar';
 import Head from 'next/head';
+import footerStyles from '@/components/Footer/styles.module.scss';
+import Link from 'next/link';
+import { HiOutlineArrowLeft } from 'react-icons/hi';
+import { MdDeleteForever } from 'react-icons/md';
 
 export default function CredentialPage() {
   const router = useRouter();
@@ -41,6 +45,19 @@ export default function CredentialPage() {
         ) : (
           <div>Ainda não possui dados</div>
         )}
+        <div className={footerStyles.footerContainer}>
+          <Link href='/credentials'>
+            <div>
+              <h1>
+                <HiOutlineArrowLeft />
+                <p>Voltar</p>
+              </h1>
+            </div>
+          </Link>
+          <div className={footerStyles.icon_add}>
+            <MdDeleteForever />
+          </div>
+        </div>
       </main>
     </>
   );
