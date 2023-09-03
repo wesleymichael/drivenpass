@@ -21,7 +21,7 @@ export default function Credentials() {
         {credentialsData?.map((credential) => {
           return (
           <>
-            <div className={styles.categoryContainer}>
+            <div className={styles.categoryContainer} key={credential.id}>
               <Link href={`/credentials/${credential.id}`}>
                 <div>
                   <RiLogoutBoxRFill />
