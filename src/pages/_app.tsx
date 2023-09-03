@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
 import { UserProvider } from '@/context/UserContext';
 import { CredentialProvider } from '@/context/CredentialContext';
+import { WifiProvider } from '@/context/WifiContext';
  
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -17,8 +18,10 @@ export default function App({ Component, pageProps }: AppProps) {
       <ToastContainer />
       <UserProvider>
         <CredentialProvider>
-          {['/register', '/login'].includes(currentRouterPage) ? null : <Header />}
-          <Component {...pageProps} /> 
+          <WifiProvider>
+            {['/register', '/login'].includes(currentRouterPage) ? null : <Header />}
+            <Component {...pageProps} /> 
+          </WifiProvider>
         </CredentialProvider>
       </UserProvider>
     </>

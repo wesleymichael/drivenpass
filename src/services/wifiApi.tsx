@@ -1,11 +1,21 @@
 import { AxiosResponse } from 'axios';
 import api from './api';
 
-export async function getWifi(token: string) {
+export interface Wifi {
+  id: number;
+  title: string;
+  name: string;
+  password: string;
+  userId: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export async function getWifis(token: string) {
   const response: AxiosResponse = await api.get('/wifi', {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
-  return response.data;
+  return response.data as Wifi[];
 }

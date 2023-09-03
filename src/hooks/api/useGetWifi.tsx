@@ -6,16 +6,16 @@ export default function useGetWifi() {
   const token = useToken();
 
   const {
-    data: wifi,
+    data: wifis,
     loading: wifiLoading,
     error: wifiError,
-    act: getWifi
-  } = useAsync(() => wifiApi.getWifi(token));
+    act: getWifis
+  } = useAsync(() => wifiApi.getWifis(token));
 
   return {
-    wifi,
+    wifis,
     wifiLoading,
     wifiError,
-    getWifi
+    getWifis
   };
 }

@@ -7,16 +7,16 @@ import { AiFillCreditCard, AiOutlineWifi } from 'react-icons/ai';
 import Link from "next/link";
 import useToken from "@/hooks/useToken";
 import { useRouter } from "next/router";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import useGetCards from "@/hooks/api/useGetCards";
-import useGetWifi from "@/hooks/api/useGetWifi";
 import useGetNotes from "@/hooks/api/useGetNotes";
 import { useCredentialContext } from "@/hooks/useCredentialContext";
+import { useWifiContext } from "@/hooks/useWifiContext";
 
 export default function Home() {
   const { credentialsData } = useCredentialContext();
+  const { wifisData } = useWifiContext();
   const { cards } = useGetCards();
-  const { wifi } = useGetWifi();
   const { notes } = useGetNotes();
   const router = useRouter();
   const token = useToken();
@@ -78,7 +78,7 @@ export default function Home() {
             </div>
           </Link>
           <div className={styles.number}>
-            {wifi?.length}
+            {wifisData?.length}
           </div>
         </div>
       </main>
