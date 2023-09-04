@@ -25,3 +25,12 @@ export async function getCards(token: string) {
   });
   return response.data as Cards[];
 }
+
+export async function deleteCards(token: string, id: number) {
+  const response: AxiosResponse = await api.delete(`/cards/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data as Cards;
+}

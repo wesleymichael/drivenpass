@@ -10,14 +10,35 @@ import { useCardsContext } from '@/hooks/useCardContext';
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
 import styles from '../../components/styles/item.module.scss';
 import footerStyles from '@/components/Footer/styles.module.scss';
+import useDeleteCards from '@/hooks/api/useDeleteCards';
+import { AxiosError } from 'axios';
+import { toast } from 'react-toastify';
 
 export default function CardsPage() {
+  const { deleteCards } = useDeleteCards();
+  const { cardsData, setCardsData } = useCardsContext();
   const router = useRouter();
   const { id } = router.query;
-  const { cardsData } = useCardsContext();
   const [isFront, setIsFront] = useState(true);
 
   const card = cardsData.find((card) => card.id === Number(id));
+
+  async function deleteById(id: number) {
+    try {
+      const res = await deleteCards(id);
+      
+      if(res instanceof AxiosError) {
+        toast(res.response?.data.message);
+      } else {
+        toast('Success');
+        setCardsData(cardsData.filter(c => c.id !== id));
+        router.push('/cards');
+      }
+    } catch (error) {
+      toast('Error!');
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -58,7 +79,7 @@ export default function CardsPage() {
               </h1>
             </div>
           </Link>
-          <div className={footerStyles.icon_add}>
+          <div className={`${footerStyles.icon_add} ${footerStyles.icon_delete}`} onClick={() => deleteById(Number(id))}>
             <MdDeleteForever />
           </div>
         </div>
