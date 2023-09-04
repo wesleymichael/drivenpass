@@ -1,5 +1,5 @@
-import { AxiosResponse } from 'axios';
 import api from './api';
+import { AxiosResponse } from 'axios';
 
 export interface Wifi {
   id: number;
@@ -28,6 +28,15 @@ export async function getWifis(token: string) {
 
 export async function createWifi(token: string, body: WifiBody) {
   const response: AxiosResponse = await api.post('/wifi', body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data as Wifi;
+}
+
+export async function deleteWifi(token: string, id: number) {
+  const response: AxiosResponse = await api.delete(`/wifi/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

@@ -25,7 +25,6 @@ export default function AddCredential() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({...form, [e.target.name]: e.target.value});
-    console.log(form);
   };
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
