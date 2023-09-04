@@ -6,11 +6,19 @@ export const useForm = (options) => {
 
   const handleChange = (key, sanitizeFn?) => (e) => {
     const value = sanitizeFn ? sanitizeFn(e.target.value) : e.target.value;
+    const { type, checked } = e.target;
 
-    setData({
-      ...data,
-      [key]: value,
-    });
+    if (type === "checkbox") {
+      setData({
+        ...data,
+        [key]: checked,
+      })
+    } else {
+      setData({
+        ...data,
+        [key]: value,
+      });
+    }
   };
 
   const customHandleChange = (key, sanitizeFn?) => (inputValue) => {

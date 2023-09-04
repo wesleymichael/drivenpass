@@ -2,7 +2,11 @@ const creditCardValidation = {
   number: {
     required: { value: true, message: 'digite o numero do cartão' },
     custom: {
-      isValid: (value) => parseInt(value?.replaceAll(' ', '')?.length, 10) === 16,
+      isValid: (value: string) => {
+        const sanitizedValue = value?.replaceAll(' ', '');
+        const length = sanitizedValue?.length;
+        return length >= 13 && length <= 19;
+      },
       message: 'Digite um numero válido para o cartão',
     }
   },
@@ -13,11 +17,14 @@ const creditCardValidation = {
     required: { value: true, message: 'digite a data de expiração' },
     pattern: { value: '^[0-9]{2}/[0-9]{2}$', message: 'digite a data em formato válido "xx/xx"' }
   },
-  cvv: {
+  cvc: {
     required: { value: true, message: 'digite o cvv' },
     custom: {
-      isValid: (value) => parseInt(value?.length, 10) === 3,
-      message: 'cvv deve possuir três digitos',
+      isValid: (value: string) => {
+        const length = parseInt(value?.length, 10);
+        return length === 3 || length === 4;
+      },
+      message: 'cvv deve possuir três ou quatro digitos',
     }
   },
 };

@@ -1,8 +1,7 @@
 import { AxiosResponse } from 'axios';
 import api from './api';
 
-export interface Cards {
-  id: number;
+export interface CardBody {
   title: string;
   number: string;
   name: string;
@@ -12,6 +11,9 @@ export interface Cards {
   isVirtual: boolean;
   isCredit: boolean;
   isDebit: boolean;
+}
+export interface Cards extends CardBody {
+  id: number;
   userId: number;
   createdAt: Date;
   updatedAt: Date;
@@ -24,6 +26,15 @@ export async function getCards(token: string) {
     },
   });
   return response.data as Cards[];
+}
+
+export async function createCard(token: string, body: CardBody ) {
+  const response: AxiosResponse = await api.post('/cards', body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data as Cards;
 }
 
 export async function deleteCards(token: string, id: number) {

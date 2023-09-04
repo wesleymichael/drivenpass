@@ -1,34 +1,18 @@
-import Cards from 'react-credit-cards-2';
-import 'react-credit-cards-2/dist/es/styles-compiled.css';
-import { toast } from 'react-toastify';
-import { useForm } from '../../hooks/useForm';
-import creditCardValidation from './CreditCardFormsValidation';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
+import Cards from 'react-credit-cards-2';
 import styles from './styles.module.scss';
+import { useForm } from '../../hooks/useForm';
+import useCreateCard from '@/hooks/api/useCreateCard';
+import { useCardsContext } from '@/hooks/useCardContext';
+import 'react-credit-cards-2/dist/es/styles-compiled.css';
+import creditCardValidation from './CreditCardFormsValidation';
+import { AxiosError } from 'axios';
+import router from 'next/router';
 
 export default function CardForm( ) {
-  const [cardInfo, setCardInfo] = useState({
-    title: "",
-    isVirtual: false,
-    isCredit: false,
-    isDebit: false,
-  });
-  
-  function handleNewChange(event) {
-    const { name, value, type, checked } = event.target;
-  
-    if (type === "checkbox") {
-      setCardInfo((prevInfo) => ({
-        ...prevInfo,
-        [name]: checked,
-      }));
-    } else {
-      setCardInfo((prevInfo) => ({
-        ...prevInfo,
-        [name]: value,
-      }));
-    }
-  }
+  const { createCard } = useCreateCard();
+  const { cardsData, setCardsData } = useCardsContext();
 
   const {
     handleSubmit,
@@ -39,26 +23,46 @@ export default function CardForm( ) {
   } = useForm({
     validations: creditCardValidation,
 
-    //TODO
     onSubmit: async() => { 
+      const body = {
+        title: data.title,
+        number: data.number,
+        name: data.name,
+        cvv: data.cvc,
+        exp: data.expiry,
+        password: data.password,
+        isVirtual: data.isVirtual,
+        isCredit: data.isCredit,
+        isDebit: data.isDebit
+      }
       try {
-        //Enviar para o db
-        toast('Sucesso!');
+        const res = await createCard(body);
+        
+        if(res instanceof AxiosError) {
+          toast(res.response?.data.message);
+        } else {
+          toast('Success!');
+          setCardsData([...cardsData, { ...res, password: body.password, cvv: body.cvv }]);
+          router.push('/cards');
+        }
       } catch ( error ) {
         toast('Deu erro!');
       };
     },
 
     initialValues: {
+      title: '',
       number: '',
       expiry: '',
       cvc: '',
       name: '',
       focus: '',
+      password: '',
+      isVirtual: false,
+      isCredit: false,
+      isDebit: false,
     },
   });
-
-  console.log(data);
   
   return (
     <>
@@ -76,8 +80,8 @@ export default function CardForm( ) {
             <input
               name="title"
               type="text"
-              value={cardInfo.title}
-              onChange={handleNewChange}
+              value={data.title}
+              onChange={handleChange('title')}
             />
           </div>
 
@@ -87,7 +91,7 @@ export default function CardForm( ) {
               name="number"
               type="text"
               value={data.number}
-              onClick={(e) => customHandleChange('focus')(e.target.name)}
+              onFocus={(e) => customHandleChange('focus')(e.target.name)}
               onChange={handleChange('number')}
             />
             {errors.number ? <small>{errors.number}</small> : <small></small>}
@@ -99,7 +103,7 @@ export default function CardForm( ) {
               name="name"
               type="text"
               value={data.name}
-              onClick={(e) => customHandleChange('focus')(e.target.name)}
+              onFocus={(e) => customHandleChange('focus')(e.target.name)}
               onChange={handleChange('name')}
             />
             {errors.name && <small>{errors.name}</small>}
@@ -111,10 +115,10 @@ export default function CardForm( ) {
               name="expiry"
               type="text"
               value={data.expiry}
-              onClick={(e) => customHandleChange('focus')(e.target.name)}
+              onFocus={(e) => customHandleChange('focus')(e.target.name)}
               onChange={handleChange('expiry')}
             />
-            {errors.expiry ? <small className='paymentInputExpiry'>{errors.expiry}</small > : <small className='paymentInputExpiry'></small>}
+            {errors.expiry ? <small>{errors.expiry}</small > : <small></small>}
           </div>
 
           <div className={styles.formContent}>
@@ -123,10 +127,20 @@ export default function CardForm( ) {
               name="cvc"
               type="text"
               value={data.cvc}
-              onClick={(e) => customHandleChange('focus')(e.target.name)}
+              onFocus={(e) => customHandleChange('focus')(e.target.name)}
               onChange={handleChange('cvc')}
             />
-            {errors.cvc && <small className='paymentInputCvc'>{errors.cvc}</small>}
+            {errors.cvc && <small>{errors.cvc}</small>}
+          </div>
+
+          <div className={styles.formContent}>
+            <label>Senha:</label>
+            <input
+              name="password"
+              type="text"
+              value={data.password}
+              onChange={handleChange('password')}
+            />
           </div>
 
           <div className={`${styles.formContent} ${styles.inputCheck}`}>
@@ -134,8 +148,8 @@ export default function CardForm( ) {
             <input
               name="isVirtual"
               type="checkbox"
-              checked={cardInfo.isVirtual}
-              onChange={handleNewChange}
+              checked={data.isVirtual}
+              onChange={handleChange('isVirtual')}
             />
           </div>
 
@@ -144,8 +158,8 @@ export default function CardForm( ) {
             <input
               name="isCredit"
               type="checkbox"
-              checked={cardInfo.isCredit}
-              onChange={handleNewChange}
+              checked={data.isCredit}
+              onChange={handleChange('isCredit')}
             />
           </div>
 
@@ -154,8 +168,8 @@ export default function CardForm( ) {
             <input
               name="isDebit"
               type="checkbox"
-              checked={cardInfo.isDebit}
-              onChange={handleNewChange}
+              checked={data.isDebit}
+              onChange={handleChange('isDebit')}
             />
           </div>
 

@@ -20,8 +20,8 @@ export default function Cards() {
         <SubTitleBar title='Cartões'/>
         {cardsData?.map((card) => {
           return (
-            <>
-            <div className={styles.categoryContainer}>
+          <>
+            <div className={styles.categoryContainer} key={card.id}>
               <Link href={`/cards/${card.id}`}>
                 <div>
                   <AiFillCreditCard />
