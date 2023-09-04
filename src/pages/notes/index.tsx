@@ -41,9 +41,11 @@ export default function Notes() {
               </h1>
             </div>
           </Link>
-          <div className={footerStyles.icon_add}>
-            <MdAddCircleOutline/>
-          </div>
+          <Link href='/notes/create'>
+            <div className={footerStyles.icon_add}>
+              <MdAddCircleOutline/>
+            </div>
+          </Link>
         </div>
       </main>
     </>
