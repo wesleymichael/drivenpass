@@ -1,7 +1,7 @@
 import { SubTitleBar } from "@/components/SubtitleBar";
 import Head from "next/head";
 import styles from '@/styles/home.module.scss';
-import { AiFillCreditCard } from 'react-icons/ai';
+import { AiOutlineWifi } from 'react-icons/ai';
 import Link from "next/link";
 import footerStyles from '@/components/Footer/styles.module.scss';
 import { HiOutlineArrowLeft } from "react-icons/hi";
@@ -24,7 +24,7 @@ export default function Credentials() {
             <div className={styles.categoryContainer}>
               <Link href={`/wifi/${wifi.id}`}>
                 <div>
-                  <AiFillCreditCard />
+                  <AiOutlineWifi />
                   <h1>{wifi.title}</h1>
                 </div>
               </Link>
