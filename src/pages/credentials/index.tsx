@@ -41,9 +41,11 @@ export default function Credentials() {
               </h1>
             </div>
           </Link>
-          <div className={footerStyles.icon_add}>
-            <MdAddCircleOutline />
-          </div>
+          <Link href='/credentials/create'>
+            <div className={footerStyles.icon_add}>
+              <MdAddCircleOutline />
+            </div>
+          </Link>
         </div>
       </main>
     </>
