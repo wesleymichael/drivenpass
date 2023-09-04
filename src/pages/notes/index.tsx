@@ -1,15 +1,15 @@
-import { SubTitleBar } from "@/components/SubtitleBar";
+import Link from "next/link";
 import Head from "next/head";
 import styles from '@/styles/home.module.scss';
 import { BsFillPencilFill } from 'react-icons/bs';
-import Link from "next/link";
-import useGetNotes from "@/hooks/api/useGetNotes";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import { MdAddCircleOutline } from "react-icons/md";
+import { SubTitleBar } from "@/components/SubtitleBar";
+import { useNotesContext } from "@/hooks/useNoteContext";
 import footerStyles from '@/components/Footer/styles.module.scss';
 
 export default function Notes() {
-  const { notes } = useGetNotes();
+  const { notesData } = useNotesContext();
 
   return (
     <>
@@ -18,7 +18,7 @@ export default function Notes() {
       </Head>
       <SubTitleBar title='Notas Seguras'/>
       <main className={styles.itemContent}>
-        {notes?.map((note) => {
+        {notesData?.map((note) => {
           return (
           <>
             <div className={styles.categoryContainer}>
