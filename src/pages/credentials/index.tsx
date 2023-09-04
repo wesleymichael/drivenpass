@@ -22,8 +22,8 @@ export default function Credentials() {
           return (
           <>
             <div className={styles.categoryContainer} key={credential.id}>
-              <Link href={`/credentials/${credential.id}`}>
-                <div>
+              <Link href={`/credentials/${credential.id}`} key={credential.id}>
+                <div key={credential.title}>
                   <RiLogoutBoxRFill />
                   <h1>{credential.title}</h1>
                 </div>

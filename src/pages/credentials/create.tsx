@@ -6,8 +6,17 @@ import footerStyles from "@/components/Footer/styles.module.scss";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import Link from "next/link";
 import { useState } from "react";
+import useCreateCredentials from "@/hooks/api/useCreateCredentials";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import { useCredentialContext } from "@/hooks/useCredentialContext";
+import { AxiosError } from "axios";
 
 export default function AddCredential() {
+  const { createCredential, credentialLoading } = useCreateCredentials();
+  const { credentialsData, setCredentialsData } = useCredentialContext();
+  const router = useRouter();
+  
   const [form, setForm] = useState({
     title: "",
     username: "",
@@ -16,23 +25,27 @@ export default function AddCredential() {
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+    setForm({...form, [e.target.name]: e.target.value});
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
-    //TODO: integração com a API
+    
     try {
-      //Enviar para API
-      console.log("Enviando dados:", form);
-      //Encaminhar para a rota /credentials
+      const res = await createCredential(form);
+      
+      if(res instanceof AxiosError) {
+        toast(res.response?.data.message);
+      } else {
+        toast('Success');
+        setCredentialsData([...credentialsData, { ...res, password: form.password }]);
+        router.push('/credentials');
+      }
     } catch (error) {
-      console.error("Erro ao criar a credencial:", error);
-      //Tratar erros
+      toast('Error aos criar credencial!');
+      console.log(error);
     }
-  };
+  }
 
   return (
     <>
@@ -82,7 +95,7 @@ export default function AddCredential() {
               required
             />
           </div>
-          <button type="submit">Adicionar</button>
+          <button type="submit" disabled={credentialLoading}>Adicionar</button>
         </form>
       </main>
       <div className={footerStyles.footerContainer}>

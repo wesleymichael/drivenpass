@@ -12,6 +12,13 @@ export interface Credential {
   updatedAt: Date;
 }
 
+export interface CredentialBody {
+  password: string;
+  title: string;
+  url: string;
+  username: string;
+}
+
 export async function getCredentials(token: string) {
   const response: AxiosResponse = await api.get('/credentials', {
     headers: {
@@ -19,4 +26,13 @@ export async function getCredentials(token: string) {
     },
   });
   return response.data as Credential[];
+}
+
+export async function createCredential(token: string, body: CredentialBody) {
+  const response: AxiosResponse = await api.post('/credentials', body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data as Credential;
 }
