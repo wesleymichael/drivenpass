@@ -21,10 +21,10 @@ const creditCardValidation = {
     required: { value: true, message: 'digite o cvv' },
     custom: {
       isValid: (value: string) => {
-        const length = parseInt(value?.length, 10);
+        const length = parseInt(value?.length.toString(), 10);
         return length === 3 || length === 4;
       },
-      message: 'cvv deve possuir três ou quatro digitos',
+      message: 'cvv deve possuir três ou quatro dígitos',
     }
   },
 };
