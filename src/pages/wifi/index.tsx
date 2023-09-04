@@ -8,7 +8,7 @@ import { HiOutlineArrowLeft } from "react-icons/hi";
 import { MdAddCircleOutline } from "react-icons/md";
 import { useWifiContext } from "@/hooks/useWifiContext";
 
-export default function Credentials() {
+export default function Wifis() {
   const { wifisData } = useWifiContext();
 
   return (

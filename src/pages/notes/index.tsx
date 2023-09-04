@@ -8,7 +8,7 @@ import { HiOutlineArrowLeft } from "react-icons/hi";
 import { MdAddCircleOutline } from "react-icons/md";
 import footerStyles from '@/components/Footer/styles.module.scss';
 
-export default function Credentials() {
+export default function Notes() {
   const { notes } = useGetNotes();
 
   return (
@@ -16,8 +16,8 @@ export default function Credentials() {
       <Head>
         <title>Notas Seguras</title>
       </Head>
-      <main>
-        <SubTitleBar title='Notas Seguras'/>
+      <SubTitleBar title='Notas Seguras'/>
+      <main className={styles.itemContent}>
         {notes?.map((note) => {
           return (
           <>

@@ -8,7 +8,7 @@ import styles from '../../components/styles/item.module.scss';
 import footerStyles from '@/components/Footer/styles.module.scss';
 import { useWifiContext } from '@/hooks/useWifiContext';
 
-export default function WifisPage() {
+export default function WifiPage() {
   const router = useRouter();
   const { id } = router.query;
   const { wifisData } = useWifiContext();

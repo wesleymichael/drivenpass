@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { HiOutlineArrowLeft } from 'react-icons/hi';
 import { MdDeleteForever } from 'react-icons/md';
 
-export default function CredentialPage() {
+export default function CredentialsPage() {
   const router = useRouter();
   const { id } = router.query;
   const { credentialsData } = useCredentialContext();
