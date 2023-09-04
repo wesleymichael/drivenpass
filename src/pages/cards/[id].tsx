@@ -1,18 +1,18 @@
 import Link from 'next/link';
 import Head from 'next/head';
 import { useState } from 'react';
+import { AxiosError } from 'axios';
+import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import Cards from 'react-credit-cards-2';
 import { MdDeleteForever } from 'react-icons/md';
 import { HiOutlineArrowLeft } from 'react-icons/hi';
 import { SubTitleBar } from '@/components/SubtitleBar';
+import useDeleteCards from '@/hooks/api/useDeleteCards';
 import { useCardsContext } from '@/hooks/useCardContext';
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
 import styles from '../../components/styles/item.module.scss';
 import footerStyles from '@/components/Footer/styles.module.scss';
-import useDeleteCards from '@/hooks/api/useDeleteCards';
-import { AxiosError } from 'axios';
-import { toast } from 'react-toastify';
 
 export default function CardsPage() {
   const { deleteCards } = useDeleteCards();

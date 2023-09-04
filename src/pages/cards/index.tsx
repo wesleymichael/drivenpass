@@ -1,15 +1,15 @@
-import { SubTitleBar } from "@/components/SubtitleBar";
 import Head from "next/head";
+import Link from "next/link";
 import styles from '@/styles/home.module.scss';
 import { AiFillCreditCard } from 'react-icons/ai';
-import Link from "next/link";
-import useGetCards from "@/hooks/api/useGetCards";
-import footerStyles from '@/components/Footer/styles.module.scss';
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import { MdAddCircleOutline } from "react-icons/md";
+import { SubTitleBar } from "@/components/SubtitleBar";
+import { useCardsContext } from "@/hooks/useCardContext";
+import footerStyles from '@/components/Footer/styles.module.scss';
 
 export default function Cards() {
-  const { cards } = useGetCards();
+  const { cardsData } = useCardsContext();
 
   return (
     <>
@@ -18,7 +18,7 @@ export default function Cards() {
       </Head>
       <main>
         <SubTitleBar title='Cartões'/>
-        {cards?.map((card) => {
+        {cardsData?.map((card) => {
           return (
             <>
             <div className={styles.categoryContainer}>
@@ -41,9 +41,11 @@ export default function Cards() {
               </h1>
             </div>
           </Link>
-          <div className={footerStyles.icon_add}>
-            <MdAddCircleOutline />
-          </div>
+          <Link href='/cards/create'>
+            <div className={footerStyles.icon_add}>
+              <MdAddCircleOutline />
+            </div>
+          </Link>
         </div>
       </main>
     </>
