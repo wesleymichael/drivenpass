@@ -42,7 +42,7 @@ export default function AddCredential() {
         router.push('/credentials');
       }
     } catch (error) {
-      toast('Error aos criar credencial!');
+      toast('Error');
       console.log(error);
     }
   }

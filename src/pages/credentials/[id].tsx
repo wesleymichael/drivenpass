@@ -7,13 +7,34 @@ import footerStyles from '@/components/Footer/styles.module.scss';
 import Link from 'next/link';
 import { HiOutlineArrowLeft } from 'react-icons/hi';
 import { MdDeleteForever } from 'react-icons/md';
+import useDeleteCredentials from '@/hooks/api/useDeleteCredentials';
+import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
 
 export default function CredentialsPage() {
+  const { credentialsData, setCredentialsData } = useCredentialContext();
+  const { credentialLoading, deleteCredential } = useDeleteCredentials();
   const router = useRouter();
   const { id } = router.query;
-  const { credentialsData } = useCredentialContext();
 
   const credential = credentialsData.find((c) => c.id === Number(id));
+
+  async function deleteById(id: number) {
+    try {
+      const res = await deleteCredential(id);
+      
+      if(res instanceof AxiosError) {
+        toast(res.response?.data.message);
+      } else {
+        toast('Success');
+        setCredentialsData(credentialsData.filter(c => c.id !== id));
+        router.push('/credentials');
+      }
+    } catch (error) {
+      toast('Error!');
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -54,7 +75,7 @@ export default function CredentialsPage() {
               </h1>
             </div>
           </Link>
-          <div className={footerStyles.icon_add}>
+          <div className={`${footerStyles.icon_add} ${footerStyles.icon_delete}`} onClick={() => deleteById(Number(id))}>
             <MdDeleteForever />
           </div>
         </div>

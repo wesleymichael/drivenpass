@@ -36,3 +36,12 @@ export async function createCredential(token: string, body: CredentialBody) {
   });
   return response.data as Credential;
 }
+
+export async function deleteCredential(token: string, id: number) {
+  const response: AxiosResponse = await api.delete(`/credentials/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data as Credential;
+}
