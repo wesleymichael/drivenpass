@@ -2,9 +2,14 @@ import { useState } from 'react';
 
 export const useForm = (options) => {
   const [data, setData] = useState(options?.initialValues || {});
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    number: '',
+    name: '',
+    expiry: '',
+    cvc: '',
+  });
 
-  const handleChange = (key, sanitizeFn?) => (e) => {
+  const handleChange = (key, sanitizeFn) => (e) => {
     const value = sanitizeFn ? sanitizeFn(e.target.value) : e.target.value;
     const { type, checked } = e.target;
 
@@ -21,7 +26,7 @@ export const useForm = (options) => {
     }
   };
 
-  const customHandleChange = (key, sanitizeFn?) => (inputValue) => {
+  const customHandleChange = (key, sanitizeFn) => (inputValue) => {
     const value = sanitizeFn ? sanitizeFn(inputValue) : inputValue;
     setData({
       ...data,
