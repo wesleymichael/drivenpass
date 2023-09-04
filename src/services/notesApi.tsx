@@ -30,5 +30,14 @@ export async function createNote(token: string, body: NoteBody) {
       Authorization: `Bearer ${token}`,
     },
   });
-  return response.data as Note[];
+  return response.data as Note;
+}
+
+export async function deleteNote(token: string, id: number) {
+  const response: AxiosResponse = await api.delete(`/notes/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data as Note;
 }
