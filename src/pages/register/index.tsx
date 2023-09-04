@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import styles from './styles.module.scss';
+import { useEffect, useState } from 'react';
 import authStyles from '@/components/styles/authStyles.module.scss';
 import { GiPadlock } from 'react-icons/gi';
 import { useRouter } from 'next/navigation';
@@ -7,11 +6,19 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { toast } from 'react-toastify';
 import { register } from '@/services/authApi';
+import useToken from '@/hooks/useToken';
 
 export default function Register() {
   const [form, setForm] = useState({'email': '', 'password': ''});
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
+  const token = useToken();
+
+  useEffect(() => {
+    if(token) {
+      router.push('/');
+    }
+  }, [token, router]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm({...form, [e.target.name]: e.target.value})

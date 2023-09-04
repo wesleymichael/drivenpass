@@ -1,19 +1,18 @@
-import authStyles from '@/components/styles/authStyles.module.scss';
-import UserContext, { UserContextProps } from '@/context/UserContext';
-import { login } from '@/services/authApi';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useContext, useEffect, useState } from 'react';
-import { GiPadlock, GiPadlockOpen } from 'react-icons/gi';
 import { toast } from 'react-toastify';
+import { login } from '@/services/authApi';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useUserContext } from '@/hooks/useUserContext';
+import { GiPadlock, GiPadlockOpen } from 'react-icons/gi';
+import authStyles from '@/components/styles/authStyles.module.scss';
 
 export default function Login() {
   const [form, setForm] = useState({'email': '', 'password': ''});
   const [isLoading, setIsLoading] = useState(false);
   const [isAuthorized, setIsAuthorized] = useState(false);
-
-  const { userData, setUserData } = useContext(UserContext) as UserContextProps;
+  const { userData, setUserData } = useUserContext();
 
   const router = useRouter();
 
@@ -21,7 +20,7 @@ export default function Login() {
     if(userData && userData.token) {
       router.push('/');
     }
-  }, []);
+  }, [userData, router]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm({...form, [e.target.name]: e.target.value})
