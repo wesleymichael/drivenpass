@@ -41,9 +41,11 @@ export default function Wifis() {
               </h1>
             </div>
           </Link>
-          <div className={footerStyles.icon_add}>
-            <MdAddCircleOutline />
-          </div>
+          <Link href='/wifi/create'>
+            <div className={footerStyles.icon_add}>
+              <MdAddCircleOutline/>
+            </div>
+          </Link>
         </div>
       </main>
     </>

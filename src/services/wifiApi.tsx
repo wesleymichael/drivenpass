@@ -11,6 +11,12 @@ export interface Wifi {
   updatedAt: Date;
 }
 
+export interface WifiBody {
+  title: string;
+  name: string;
+  password: string;
+}
+
 export async function getWifis(token: string) {
   const response: AxiosResponse = await api.get('/wifi', {
     headers: {
@@ -18,4 +24,13 @@ export async function getWifis(token: string) {
     },
   });
   return response.data as Wifi[];
+}
+
+export async function createWifi(token: string, body: WifiBody) {
+  const response: AxiosResponse = await api.post('/wifi', body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data as Wifi;
 }
