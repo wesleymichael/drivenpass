@@ -5,6 +5,7 @@ import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import styles from "@/styles/home.module.scss";
+import { ThreeDots } from "react-loader-spinner";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import useCreateWifi from "@/hooks/api/useCreateWifi";
 import { SubTitleBar } from "@/components/SubtitleBar";
@@ -84,7 +85,19 @@ export default function AddCredential() {
               required
             />
           </div>
-          <button type="submit" disabled={wifiLoading}>Adicionar</button>
+          <button type="submit" disabled={wifiLoading}>
+            {wifiLoading ? 
+              <ThreeDots 
+                height="80" 
+                width="80" 
+                radius="9"
+                color="#0a0a0a" 
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                visible={true}
+              /> 
+              : 'Adicionar'}
+          </button>
         </form>
       </main>
       <div className={footerStyles.footerContainer}>

@@ -11,6 +11,7 @@ import { SubTitleBar } from "@/components/SubtitleBar";
 import { useNotesContext } from "@/hooks/useNoteContext";
 import formStyles from '@/components/styles/form.module.scss';
 import footerStyles from "@/components/Footer/styles.module.scss";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function AddNote() {
   const { createNote, noteLoading } = useCreateNote();
@@ -72,7 +73,17 @@ export default function AddNote() {
               required
             />
           </div>
-          <button type="submit" disabled={noteLoading}>Adicionar</button>
+          <button type="submit" disabled={noteLoading}>
+            {noteLoading ? <ThreeDots 
+                height="80" 
+                width="80" 
+                radius="9"
+                color="#0a0a0a" 
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                visible={true}
+              /> : 'Adicionar' }
+          </button>
         </form>
       </main>
       <div className={footerStyles.footerContainer}>

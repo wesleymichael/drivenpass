@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { useUserContext } from '@/hooks/useUserContext';
 import { GiPadlock, GiPadlockOpen } from 'react-icons/gi';
 import authStyles from '@/components/styles/authStyles.module.scss';
+import { ThreeDots } from 'react-loader-spinner';
 
 export default function Login() {
   const [form, setForm] = useState({'email': '', 'password': ''});
@@ -38,7 +39,7 @@ export default function Login() {
         router.push('/');
       }, 1000);
     } catch (error : any) {
-      toast(error.response.data.message)
+      toast('Error ao fazer login!');
       setIsLoading(false);
     }
   }
@@ -81,7 +82,16 @@ export default function Login() {
           required
         />
         <button type="submit" disabled={isLoading}>
-          {isLoading ? "Loading..." : "Acessar"}
+          {isLoading ? 
+            <ThreeDots 
+              height="80" 
+              width="80" 
+              radius="9"
+              color="#0a0a0a" 
+              ariaLabel="three-dots-loading"
+              visible={true}
+            /> 
+            : "Acessar"}
         </button>
       </form>
       

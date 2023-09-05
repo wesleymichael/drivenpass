@@ -1,16 +1,17 @@
-import { SubTitleBar } from "@/components/SubtitleBar";
 import Head from "next/head";
-import styles from "@/styles/home.module.scss";
-import formStyles from '@/components/styles/form.module.scss';
-import footerStyles from "@/components/Footer/styles.module.scss";
-import { HiOutlineArrowLeft } from "react-icons/hi";
 import Link from "next/link";
 import { useState } from "react";
-import useCreateCredentials from "@/hooks/api/useCreateCredentials";
-import { useRouter } from "next/router";
-import { toast } from "react-toastify";
-import { useCredentialContext } from "@/hooks/useCredentialContext";
 import { AxiosError } from "axios";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+import styles from "@/styles/home.module.scss";
+import { ThreeDots } from "react-loader-spinner";
+import { HiOutlineArrowLeft } from "react-icons/hi";
+import { SubTitleBar } from "@/components/SubtitleBar";
+import formStyles from '@/components/styles/form.module.scss';
+import footerStyles from "@/components/Footer/styles.module.scss";
+import useCreateCredentials from "@/hooks/api/useCreateCredentials";
+import { useCredentialContext } from "@/hooks/useCredentialContext";
 
 export default function AddCredential() {
   const { createCredential, credentialLoading } = useCreateCredentials();
@@ -95,7 +96,19 @@ export default function AddCredential() {
               required
             />
           </div>
-          <button type="submit" disabled={credentialLoading}>Adicionar</button>
+          <button type="submit" disabled={credentialLoading}>
+            {credentialLoading ? 
+              <ThreeDots 
+                height="80" 
+                width="80" 
+                radius="9"
+                color="#0a0a0a" 
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                visible={true}
+              /> 
+              : 'Adicionar' }
+          </button>
         </form>
       </main>
       <div className={footerStyles.footerContainer}>

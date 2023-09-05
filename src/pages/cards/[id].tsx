@@ -51,7 +51,7 @@ export default function CardsPage() {
           <div className={styles.categoryContainer}>
             <h1>{card.title}</h1>
             <div className={styles.paramContainer}>
-              <div onClick={() => setIsFront(!isFront)}>
+              <div onClick={() => setIsFront(!isFront)} className={styles.showCardContainer}>
                 <Cards
                   number={Number(card.number)}
                   expiry={card.exp}

@@ -9,9 +9,10 @@ import 'react-credit-cards-2/dist/es/styles-compiled.css';
 import creditCardValidation from './CreditCardFormsValidation';
 import { AxiosError } from 'axios';
 import router from 'next/router';
+import { ThreeDots } from 'react-loader-spinner';
 
 export default function CardForm( ) {
-  const { createCard } = useCreateCard();
+  const { createCard, cardLoading } = useCreateCard();
   const { cardsData, setCardsData } = useCardsContext();
 
   const {
@@ -174,8 +175,18 @@ export default function CardForm( ) {
           </div>
 
         </form>
-        <button onClick={ handleSubmit } className={styles.button}>
-          Enviar dados
+        <button onClick={ handleSubmit } className={styles.button} disabled={cardLoading}>
+          {cardLoading ? 
+            <ThreeDots 
+              height="80" 
+              width="80" 
+              radius="9"
+              color="#0a0a0a" 
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              visible={true}
+            /> 
+            : 'Adicionar' }
         </button>
       </div>
     </>

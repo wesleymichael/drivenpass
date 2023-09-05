@@ -7,6 +7,7 @@ import Head from 'next/head';
 import { toast } from 'react-toastify';
 import { register } from '@/services/authApi';
 import useToken from '@/hooks/useToken';
+import { ThreeDots } from 'react-loader-spinner';
 
 export default function Register() {
   const [form, setForm] = useState({'email': '', 'password': ''});
@@ -48,7 +49,6 @@ export default function Register() {
     return passwordRegex.test(password);
   }
 
-  
   return(
     <>
     <Head>
@@ -84,7 +84,17 @@ export default function Register() {
           title="A senha deve ter pelo menos: 10 caracteres, 1 caractere especial, 1 letra maiúscula, 1 letra minúscula e 1 número"
           />
         <button type="submit" disabled={isLoading}>
-          {isLoading ? "Loading..." : "Cadastrar"}
+          {isLoading ? 
+            <ThreeDots 
+              height="80" 
+              width="80" 
+              radius="9"
+              color="#0a0a0a" 
+              ariaLabel="three-dots-loading"
+              visible={true}
+            /> 
+            :
+            "Cadastrar"}
         </button>
       </form>
 
