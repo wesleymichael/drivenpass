@@ -4,7 +4,7 @@ With just one master password, you can access all your confidential credentials 
 Never worry about memorizing complex passwords again - let DrivenPass take care of it for you! Your online security has never been this easy.
 
 <p align="center">
-  <img src="/public/images/drivenpass-usage.gif" />
+  <img src="/public/images/drivenpass-usage.gif" width="300" />
 </p>
 
 ## About
